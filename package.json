@@ -1,0 +1,7 @@
+{
+  "name": "hydro-exmdtex",
+  "version": "1.0.0",
+  "description": "ExMdTeX - 为 Hydro 增加 QQ 表情（/kk /kel 等 152 个代码）与洛谷折叠框（:::info[标题]{open}）语法",
+  "main": "index.ts",
+  "license": "MIT"
+}

@@ -1,0 +1,232 @@
+/**
+ * ExMdTeX 样式 —— QQ 表情 + 洛谷折叠框
+ * 由 frontend/exmdtex.page.ts 引入，esbuild 会把它并入 entry.css，
+ * 由 Hydro 的 _hydroLoad 注入到页面 <style> 中。
+ */
+
+/* ------------------------------------------------------------------ *
+ * QQ 表情
+ * ------------------------------------------------------------------ */
+
+.typo img.exmdtex-face,
+.markdown-body img.exmdtex-face,
+img.exmdtex-face {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    max-width: none;
+    max-height: none;
+    margin: 0 1px;
+    vertical-align: -4px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+}
+
+/* 折叠框标题里的表情略小一点，避免把标题行撑高 */
+.exmdtex-callout__header img.exmdtex-face {
+    width: 18px;
+    height: 18px;
+    vertical-align: -3px;
+}
+
+/* ------------------------------------------------------------------ *
+ * 折叠框（洛谷 :::info / :::success / :::warning / :::error）
+ * ------------------------------------------------------------------ */
+
+.exmdtex-callout {
+    margin: 12px 0;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.exmdtex-callout__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+/* 去掉 Safari / Chrome 默认的三角 */
+.exmdtex-callout__header::-webkit-details-marker {
+    display: none;
+}
+
+.exmdtex-callout__header::marker {
+    content: '';
+}
+
+.exmdtex-callout__icon {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: #fff;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 16px;
+    text-align: center;
+    font-style: normal;
+}
+
+.exmdtex-callout__title {
+    flex: 1 1 auto;
+    min-width: 0;
+    word-break: break-word;
+}
+
+/* 标题由行内 markdown 渲染，去掉可能出现的段落间距 */
+.exmdtex-callout__title > p {
+    margin: 0;
+}
+
+.exmdtex-callout__title .katex {
+    font-size: 1.05em;
+}
+
+.exmdtex-callout__arrow {
+    flex: none;
+    width: 7px;
+    height: 7px;
+    margin-left: 4px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    opacity: 0.55;
+    transition: transform 0.15s ease;
+}
+
+.exmdtex-callout[open] > .exmdtex-callout__header .exmdtex-callout__arrow {
+    transform: rotate(45deg);
+}
+
+.exmdtex-callout__body {
+    padding: 8px 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    overflow-x: auto;
+}
+
+.exmdtex-callout__body > :first-child {
+    margin-top: 0;
+}
+
+.exmdtex-callout__body > :last-child {
+    margin-bottom: 0;
+}
+
+/* 嵌套折叠框的间距收紧 */
+.exmdtex-callout__body .exmdtex-callout {
+    margin: 8px 0;
+}
+
+/* 四种类型配色 */
+.exmdtex-callout--info {
+    border-color: #b6e3ff;
+}
+
+.exmdtex-callout--info > .exmdtex-callout__header {
+    background: #ddf4ff;
+    color: #0969da;
+}
+
+.exmdtex-callout--info .exmdtex-callout__icon {
+    background: #0969da;
+}
+
+.exmdtex-callout--success {
+    border-color: #aceebb;
+}
+
+.exmdtex-callout--success > .exmdtex-callout__header {
+    background: #dafbe1;
+    color: #1a7f37;
+}
+
+.exmdtex-callout--success .exmdtex-callout__icon {
+    background: #1a7f37;
+}
+
+.exmdtex-callout--warning {
+    border-color: #f5d97a;
+}
+
+.exmdtex-callout--warning > .exmdtex-callout__header {
+    background: #fff8c5;
+    color: #9a6700;
+}
+
+.exmdtex-callout--warning .exmdtex-callout__icon {
+    background: #9a6700;
+}
+
+.exmdtex-callout--error {
+    border-color: #ffc9c9;
+}
+
+.exmdtex-callout--error > .exmdtex-callout__header {
+    background: #ffebe9;
+    color: #cf222e;
+}
+
+.exmdtex-callout--error .exmdtex-callout__icon {
+    background: #cf222e;
+}
+
+/* ------------------------------------------------------------------ *
+ * 暗色主题
+ * ------------------------------------------------------------------ */
+
+html.theme--dark .exmdtex-callout {
+    background: #161b22;
+    border-color: #30363d;
+}
+
+html.theme--dark .exmdtex-callout__body {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+html.theme--dark .exmdtex-callout--info {
+    border-color: #1f6feb;
+}
+
+html.theme--dark .exmdtex-callout--info > .exmdtex-callout__header {
+    background: rgba(56, 139, 253, 0.18);
+    color: #79c0ff;
+}
+
+html.theme--dark .exmdtex-callout--success {
+    border-color: #2ea043;
+}
+
+html.theme--dark .exmdtex-callout--success > .exmdtex-callout__header {
+    background: rgba(46, 160, 67, 0.18);
+    color: #7ee787;
+}
+
+html.theme--dark .exmdtex-callout--warning {
+    border-color: #9e6a03;
+}
+
+html.theme--dark .exmdtex-callout--warning > .exmdtex-callout__header {
+    background: rgba(187, 128, 9, 0.2);
+    color: #e3b341;
+}
+
+html.theme--dark .exmdtex-callout--error {
+    border-color: #da3633;
+}
+
+html.theme--dark .exmdtex-callout--error > .exmdtex-callout__header {
+    background: rgba(248, 81, 73, 0.18);
+    color: #ff7b72;
+}
